@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quinta &amp; Co. — Get the Tool</title>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Quinta">
+<meta name="theme-color" content="#FAFAF6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAFAF6;
+    --cream-warm:#F5F2EA;
+    --surface:#FFFFFF;
+    --sage-whisper:#EEF2EC;
+    --sage-soft:#DFE7E0;
+    --border:#E8E3D7;
+    --sage:#6E8B7A;
+    --sage-deep:#4F6B5C;
+    --moss:#3D544A;
+    --heading:#20231F;
+    --body:#2F332E;
+    --body-soft:#5A5E55;
+    --muted:#8A8E83;
+    --cinzel:'Cinzel', serif;
+    --fraunces:'Fraunces', Georgia, serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--fraunces);
+    background:var(--cream);
+    color:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    justify-content:center;
+    min-height:100%;
+  }
+  .stage{
+    width:100%;
+    max-width:430px;
+    padding:0 26px 56px;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    text-align:center;
+  }
+
+  /* ---- masthead ---- */
+  .top{padding-top:54px}
+  .sprout{margin:0 auto;display:block}
+  .sprout path, .sprout line{
+    fill:none;stroke:var(--sage-deep);
+    stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round;
+  }
+  .seed{fill:var(--sage-deep);stroke:none}
+  .wordmark{
+    font-family:var(--cinzel);
+    font-weight:600;
+    letter-spacing:0.34em;
+    font-size:15px;
+    color:var(--heading);
+    margin-top:20px;
+    padding-left:0.34em;
+  }
+  .tagline{
+    font-family:var(--fraunces);
+    font-style:italic;
+    font-weight:400;
+    font-size:14.5px;
+    color:var(--body-soft);
+    margin-top:9px;
+  }
+
+  /* ---- hero ---- */
+  .eyebrow{
+    font-family:var(--cinzel);
+    font-weight:500;
+    font-size:10.5px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+    margin-top:52px;
+  }
+  h1{
+    font-family:var(--fraunces);
+    font-weight:400;
+    font-size:31px;
+    line-height:1.22;
+    color:var(--heading);
+    margin-top:18px;
+    letter-spacing:-0.01em;
+  }
+  .lede{
+    font-size:17.5px;
+    color:var(--body);
+    margin-top:18px;
+    text-align:left;
+  }
+  .beat{
+    font-family:var(--fraunces);
+    font-style:italic;
+    font-weight:400;
+    font-size:18.5px;
+    color:var(--sage-deep);
+    margin-top:18px;
+  }
+
+  /* ---- form card ---- */
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:28px 24px 26px;
+    margin-top:38px;
+    text-align:left;
+  }
+  .card-label{
+    font-family:var(--cinzel);
+    font-weight:500;
+    font-size:10px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+  }
+  .helper{
+    font-size:15.5px;
+    color:var(--body-soft);
+    margin-top:10px;
+    margin-bottom:16px;
+  }
+  input[type=email],input[type=text]{
+    font-family:var(--fraunces);
+    font-size:16px;
+    padding:14px 14px;
+    border:1px solid var(--border);
+    background:var(--cream);
+    color:var(--heading);
+    width:100%;
+    border-radius:0;
+    margin-bottom:10px;
+  }
+  input::placeholder{color:var(--muted);font-style:italic}
+  input[type=email]:focus,input[type=text]:focus{outline:none;border-color:var(--sage);background:var(--surface)}
+  .btn{
+    font-family:var(--cinzel);
+    font-weight:500;
+    font-size:11.5px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    background:var(--moss);
+    color:var(--cream);
+    border:none;
+    padding:16px 18px;
+    cursor:pointer;
+    width:100%;
+    margin-top:12px;
+    transition:background .25s ease, transform .12s ease;
+  }
+  .btn:hover{background:var(--sage-deep)}
+  .btn:active{transform:translateY(1px)}
+  .err{color:var(--moss);font-size:13.5px;font-style:italic;margin-top:9px;min-height:16px}
+  .micro{
+    font-size:13.5px;
+    color:var(--muted);
+    margin-top:16px;
+    line-height:1.5;
+  }
+
+  /* ---- delivered state ---- */
+  .done{display:none;text-align:left}
+  .done.show{display:block;animation:fade .5s ease both}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .done p{font-size:16.5px;color:var(--body);margin-top:10px}
+  .qr{
+    width:148px;height:148px;margin:20px auto 4px;
+    border:1px solid var(--border);
+    background:var(--sage-whisper);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--cinzel);font-size:9.5px;letter-spacing:0.18em;
+    color:var(--muted);text-align:center;
+  }
+
+  /* ---- footer ---- */
+  footer{margin-top:auto;padding-top:44px}
+  .foot-rule{border:none;border-top:1px solid var(--border);margin-bottom:16px}
+  .foot-line{
+    font-family:var(--cinzel);
+    font-weight:400;
+    font-size:9.5px;
+    letter-spacing:0.26em;
+    color:var(--muted);
+    text-transform:uppercase;
+  }
+
+  .rev{opacity:0;transform:translateY(8px);animation:rev .7s ease forwards}
+  @keyframes rev{to{opacity:1;transform:none}}
+  .r1{animation-delay:.05s}.r2{animation-delay:.2s}.r3{animation-delay:.36s}
+  .r4{animation-delay:.52s}.r5{animation-delay:.68s}
+</style>
+</head>
+<body>
+  <div class="stage">
+
+    <div class="top rev r1">
+      <!-- Placeholder sprout — swap in the official Quinta sprout SVG. -->
+      <svg class="sprout" width="48" height="48" viewBox="0 0 120 120" aria-label="Quinta sprout">
+        <line x1="60" y1="76" x2="60" y2="104"></line>
+        <path d="M60 76 C 38 72, 22 58, 19 33 C 46 39, 59 54, 60 76 Z"></path>
+        <path d="M60 76 C 82 72, 98 58, 101 33 C 74 39, 61 54, 60 76 Z"></path>
+        <circle class="seed" cx="60" cy="44" r="5.5"></circle>
+      </svg>
+      <div class="wordmark">QUINTA &amp; CO.</div>
+      <div class="tagline">Practical AI, taught the way a friend would teach it.</div>
+    </div>
+
+    <!-- STATE 1 -->
+    <section id="offer">
+      <div class="eyebrow rev r2">A Quinta &amp; Co. Tool</div>
+      <h1 class="rev r3">Built with AI — and actually yours.</h1>
+      <p class="lede rev r4">A small tool for your phone. Snap a business card, QR code or jot a messy note and it becomes a clean list — who they are, where you met, what you owe them. No forms. No app store.</p>
+
+      <div class="card rev r5">
+        <div class="card-label">Let's swap cards</div>
+        <p class="helper">You're about to collect everyone you meet today — so let's start with you.</p>
+        <input type="text" id="name" placeholder="First and last name" autocomplete="name">
+        <input type="email" id="email" placeholder="your email" autocomplete="email" inputmode="email">
+        <button class="btn" id="sendBtn">Get the tool</button>
+        <div class="err" id="err"></div>
+        <p class="micro">We'll only reach out when the next class opens — nothing else.</p>
+      </div>
+    </section>
+
+    <!-- STATE 2 (removed): email is a gate only; submitting routes straight to the tool, no inbox round-trip -->
+
+    <footer class="rev r5">
+      <hr class="foot-rule">
+      <div class="foot-line">Quinta &amp; Co. · Quintaand.co</div>
+    </footer>
+  </div>
+
+<script>
+  // ===== PASTE YOUR GOOGLE SHEET URL HERE =====
+  // The Apps Script "Web app" URL from the deploy step (see setup notes).
+  // Until you paste it, emails just sit in memory and aren't saved.
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxHAlszxo3CI2EWYFyFqrODfobivnXv0pkGEBTEnPGZUjr6pdgfueGgwqsoI9UtyYZB/exec';
+  // ============================================
+
+  const emailEl=document.getElementById('email');
+  const nameEl=document.getElementById('name');
+  const errEl=document.getElementById('err');
+  const valid=e=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+
+  document.getElementById('sendBtn').addEventListener('click',submit);
+  nameEl.addEventListener('keydown',e=>{if(e.key==='Enter')emailEl.focus();});
+  emailEl.addEventListener('keydown',e=>{if(e.key==='Enter')submit();});
+
+  function submit(){
+    const n=nameEl.value.trim();
+    const v=emailEl.value.trim();
+    if(!n){errEl.textContent='Your name, please.';return;}
+    if(!valid(v)){errEl.textContent='A real email, please.';return;}
+    errEl.textContent='';
+    captureSignup(n,v);
+    // route straight into the tool — same browser, no break point
+    window.location.href='quinta-networking-tool.html';
+  }
+
+  function captureSignup(n,v){
+    // If the Sheet URL hasn't been pasted yet, just hold it in memory (no error).
+    if(!SHEET_URL || SHEET_URL.indexOf('PASTE_')===0){window.__capturedSignup={name:n,email:v};return;}
+    try{
+      const blob=new Blob([JSON.stringify({name:n,email:v})],{type:'text/plain;charset=UTF-8'});
+      // sendBeacon guarantees it's sent even as we navigate to the tool.
+      if(navigator.sendBeacon){navigator.sendBeacon(SHEET_URL,blob);}
+      else{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({name:n,email:v})});}
+    }catch(e){/* never block the user from reaching the tool */}
+  }
+</script>
+</body>
+</html>
