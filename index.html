@@ -129,7 +129,7 @@
     margin-top:10px;
     margin-bottom:16px;
   }
-  input[type=email]{
+  input[type=email],input[type=text]{
     font-family:var(--fraunces);
     font-size:16px;
     padding:14px 14px;
@@ -138,9 +138,10 @@
     color:var(--heading);
     width:100%;
     border-radius:0;
+    margin-bottom:10px;
   }
-  input[type=email]::placeholder{color:var(--muted);font-style:italic}
-  input[type=email]:focus{outline:none;border-color:var(--sage);background:var(--surface)}
+  input::placeholder{color:var(--muted);font-style:italic}
+  input[type=email]:focus,input[type=text]:focus{outline:none;border-color:var(--sage);background:var(--surface)}
   .btn{
     font-family:var(--cinzel);
     font-weight:500;
@@ -220,12 +221,13 @@
       <p class="lede rev r4">A small tool for your phone. Snap a business card, QR code or jot a messy note and it becomes a clean list — who they are, where you met, what you owe them. No forms. No app store.</p>
 
       <div class="card rev r5">
-        <div class="card-label">Get started</div>
-        <p class="helper">One email and the tool's yours — it opens right here, no inbox to check.</p>
+        <div class="card-label">Let's swap cards</div>
+        <p class="helper">You're about to collect everyone you meet today — so let's start with you.</p>
+        <input type="text" id="name" placeholder="First and last name" autocomplete="name">
         <input type="email" id="email" placeholder="your email" autocomplete="email" inputmode="email">
         <button class="btn" id="sendBtn">Get the tool</button>
         <div class="err" id="err"></div>
-        <p class="micro">We'll also let you know when the next class opens — nothing else. We invite, we don't chase.</p>
+        <p class="micro">We'll only reach out when the next class opens — nothing else.</p>
       </div>
     </section>
 
@@ -238,29 +240,41 @@
   </div>
 
 <script>
+  // ===== PASTE YOUR GOOGLE SHEET URL HERE =====
+  // The Apps Script "Web app" URL from the deploy step (see setup notes).
+  // Until you paste it, emails just sit in memory and aren't saved.
+  const SHEET_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE';
+  // ============================================
+
   const emailEl=document.getElementById('email');
+  const nameEl=document.getElementById('name');
   const errEl=document.getElementById('err');
   const valid=e=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
   document.getElementById('sendBtn').addEventListener('click',submit);
+  nameEl.addEventListener('keydown',e=>{if(e.key==='Enter')emailEl.focus();});
   emailEl.addEventListener('keydown',e=>{if(e.key==='Enter')submit();});
 
   function submit(){
+    const n=nameEl.value.trim();
     const v=emailEl.value.trim();
+    if(!n){errEl.textContent='Your name, please.';return;}
     if(!valid(v)){errEl.textContent='A real email, please.';return;}
     errEl.textContent='';
-
-    // === PRODUCTION HOOK ============================================
-    // Capture the email to Quinta's list (Formspree / Mailchimp / ConvertKit
-    // / Google Form). We do NOT email anything back — the tool opens directly,
-    // so there is no inbox round-trip to lose people. Held in memory until wired.
-    window.__capturedEmail=v;
-    // e.g. fetch('https://formspree.io/f/XXXX',{method:'POST',
-    //   headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v})});
-    // ================================================================
-
+    captureSignup(n,v);
     // route straight into the tool — same browser, no break point
     window.location.href='quinta-networking-tool.html';
+  }
+
+  function captureSignup(n,v){
+    // If the Sheet URL hasn't been pasted yet, just hold it in memory (no error).
+    if(!SHEET_URL || SHEET_URL.indexOf('PASTE_')===0){window.__capturedSignup={name:n,email:v};return;}
+    try{
+      const blob=new Blob([JSON.stringify({name:n,email:v})],{type:'text/plain;charset=UTF-8'});
+      // sendBeacon guarantees it's sent even as we navigate to the tool.
+      if(navigator.sendBeacon){navigator.sendBeacon(SHEET_URL,blob);}
+      else{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({name:n,email:v})});}
+    }catch(e){/* never block the user from reaching the tool */}
   }
 </script>
 </body>
