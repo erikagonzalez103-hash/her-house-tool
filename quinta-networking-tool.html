@@ -2,555 +2,280 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Quinta Connections">
-<meta name="theme-color" content="#FAFAF6">
-<title>Quinta &amp; Co. — Connections</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quinta &amp; Co. — Get the Tool</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#FAFAF6; --cream-warm:#F5F2EA; --surface:#FFFFFF;
-    --sage-whisper:#EEF2EC; --sage-soft:#DFE7E0; --border:#E8E3D7;
-    --sage:#6E8B7A; --sage-deep:#4F6B5C; --moss:#3D544A;
-    --heading:#20231F; --body:#2F332E; --body-soft:#5A5E55; --muted:#8A8E83;
-    --cinzel:'Cinzel',serif; --fraunces:'Fraunces',Georgia,serif;
+    --cream:#FAFAF6;
+    --cream-warm:#F5F2EA;
+    --surface:#FFFFFF;
+    --sage-whisper:#EEF2EC;
+    --sage-soft:#DFE7E0;
+    --border:#E8E3D7;
+    --sage:#6E8B7A;
+    --sage-deep:#4F6B5C;
+    --moss:#3D544A;
+    --heading:#20231F;
+    --body:#2F332E;
+    --body-soft:#5A5E55;
+    --muted:#8A8E83;
+    --cinzel:'Cinzel', serif;
+    --fraunces:'Fraunces', Georgia, serif;
   }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
-  body{font-family:var(--fraunces);background:var(--cream);color:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
-  .app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding-bottom:78px}
+  body{
+    font-family:var(--fraunces);
+    background:var(--cream);
+    color:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    justify-content:center;
+    min-height:100%;
+  }
+  .stage{
+    width:100%;
+    max-width:430px;
+    padding:0 26px 56px;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    text-align:center;
+  }
 
-  /* header */
-  .bar{display:flex;align-items:center;gap:10px;padding:18px 20px 14px;border-bottom:1px solid var(--border);background:var(--cream);position:sticky;top:0;z-index:20}
-  .sprout path,.sprout line{fill:none;stroke:var(--sage-deep);stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
-  .sprout .seed{fill:var(--sage-deep);stroke:none}
-  .brand{font-family:var(--cinzel);font-weight:600;letter-spacing:0.26em;font-size:12.5px;color:var(--heading);padding-left:0.26em}
-  .bar .spacer{flex:1}
-  .menu-btn{font-family:var(--cinzel);font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage-deep);background:none;border:1px solid var(--border);padding:8px 12px;cursor:pointer}
+  /* ---- masthead ---- */
+  .top{padding-top:54px}
+  .sprout{margin:0 auto;display:block}
+  .sprout path, .sprout line{
+    fill:none;stroke:var(--sage-deep);
+    stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round;
+  }
+  .seed{fill:var(--sage-deep);stroke:none}
+  .wordmark{
+    font-family:var(--cinzel);
+    font-weight:600;
+    letter-spacing:0.34em;
+    font-size:15px;
+    color:var(--heading);
+    margin-top:20px;
+    padding-left:0.34em;
+  }
+  .tagline{
+    font-family:var(--fraunces);
+    font-style:italic;
+    font-weight:400;
+    font-size:14.5px;
+    color:var(--body-soft);
+    margin-top:9px;
+  }
 
-  .view{display:none;padding:20px;flex:1}
-  .view.show{display:block;animation:fade .35s ease both}
-  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  /* ---- hero ---- */
+  .eyebrow{
+    font-family:var(--cinzel);
+    font-weight:500;
+    font-size:10.5px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+    margin-top:52px;
+  }
+  h1{
+    font-family:var(--fraunces);
+    font-weight:400;
+    font-size:31px;
+    line-height:1.22;
+    color:var(--heading);
+    margin-top:18px;
+    letter-spacing:-0.01em;
+  }
+  .lede{
+    font-size:17.5px;
+    color:var(--body);
+    margin-top:18px;
+    text-align:left;
+  }
+  .beat{
+    font-family:var(--fraunces);
+    font-style:italic;
+    font-weight:400;
+    font-size:18.5px;
+    color:var(--sage-deep);
+    margin-top:18px;
+  }
 
-  .eyebrow{font-family:var(--cinzel);font-weight:500;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--sage-deep)}
-  h2{font-family:var(--fraunces);font-weight:400;font-size:25px;color:var(--heading);margin-top:6px;letter-spacing:-0.01em}
-  .quiet{color:var(--body-soft);font-size:15px;margin-top:6px}
-
-  /* search */
-  .search{width:100%;font-family:var(--fraunces);font-size:16px;padding:12px 14px;border:1px solid var(--border);background:var(--surface);margin:16px 0;border-radius:0}
-  .search:focus{outline:none;border-color:var(--sage)}
-  .search::placeholder{color:var(--muted);font-style:italic}
-
-  /* contact cards */
-  .card{background:var(--surface);border:1px solid var(--border);padding:16px 16px 14px;margin-bottom:12px}
-  .card .top{display:flex;gap:12px}
-  .card .photo{width:46px;height:46px;flex:none;border:1px solid var(--border);object-fit:cover;background:var(--sage-whisper)}
-  .card .nm{font-family:var(--fraunces);font-weight:500;font-size:18px;color:var(--heading)}
-  .card .co{font-size:14.5px;color:var(--body-soft)}
-  .tag{display:inline-block;font-family:var(--cinzel);font-size:8.5px;letter-spacing:0.16em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--sage-soft);color:var(--sage-deep);margin-top:8px;background:var(--sage-whisper)}
-  .card .row{font-size:14.5px;color:var(--body);margin-top:8px}
-  .card .lbl{font-family:var(--cinzel);font-size:8.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-top:8px;margin-bottom:1px}
-  .card .acts{display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
-  .link{font-family:var(--cinzel);font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--sage-deep);background:none;border:none;cursor:pointer;padding:0}
-  .link.danger{color:var(--moss)}
-
-  .empty{text-align:center;padding:50px 20px;color:var(--muted)}
-  .empty .beat{font-family:var(--fraunces);font-style:italic;font-size:18px;color:var(--sage-deep);margin-bottom:8px}
-
-  /* first-run welcome */
-  .welcome{padding:4px 0 8px;text-align:left}
-  .welcome .lede{font-size:16.5px;color:var(--body);margin-top:14px}
-  .welcome .it{font-style:italic;color:var(--sage-deep)}
-  .howto{list-style:none;counter-reset:s;margin:22px 0 4px}
-  .howto li{position:relative;padding:11px 0 11px 40px;border-top:1px solid var(--border);font-size:15.5px;color:var(--body);counter-increment:s}
-  .howto li:last-child{border-bottom:1px solid var(--border)}
-  .howto li::before{content:counter(s);position:absolute;left:0;top:11px;width:25px;height:25px;line-height:25px;text-align:center;font-family:var(--cinzel);font-size:11px;color:var(--sage-deep);border:1px solid var(--sage-soft);background:var(--sage-whisper)}
-  .welcome .btn{margin-top:22px}
-  .nudge{font-size:14px;color:var(--body-soft);text-align:center;margin-top:16px}
-  .nudge button{font-family:var(--fraunces);font-style:italic;font-size:14px;color:var(--sage-deep);background:none;border:none;text-decoration:underline;cursor:pointer;padding:0}
-
-  /* home-screen install card */
-  .install{display:flex;align-items:center;gap:15px;border:1px solid var(--border);background:var(--surface);padding:15px;margin-top:24px;cursor:pointer;width:100%;text-align:left;transition:background .2s ease}
-  .install:hover{background:var(--sage-whisper)}
-  .appicon{width:62px;height:62px;flex:none;background:var(--moss);border-radius:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(32,35,31,.18)}
-  .appicon svg *{fill:none;stroke:var(--cream);stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
-  .appicon svg .seed{fill:var(--cream);stroke:none}
-  .install .txt{flex:1}
-  .install .t1{display:block;font-family:var(--fraunces);font-weight:500;font-size:16.5px;color:var(--heading)}
-  .install .t2{display:block;font-size:13.5px;color:var(--body-soft);margin-top:3px;line-height:1.4}
-  .install .arr{font-family:var(--cinzel);color:var(--sage-deep);font-size:17px}
-
-  /* add form */
-  .seg{display:flex;gap:8px;margin:18px 0}
-  .seg button{flex:1;font-family:var(--cinzel);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;padding:11px 6px;border:1px solid var(--border);background:var(--surface);color:var(--body-soft);cursor:pointer}
-  .seg button.on{background:var(--sage-whisper);border-color:var(--sage);color:var(--sage-deep)}
-  textarea,input[type=text]{width:100%;font-family:var(--fraunces);font-size:16px;padding:12px 14px;border:1px solid var(--border);background:var(--surface);color:var(--heading);border-radius:0}
-  textarea:focus,input[type=text]:focus{outline:none;border-color:var(--sage)}
-  textarea{min-height:120px;resize:vertical;line-height:1.5}
-  .field{margin-bottom:12px}
-  .field label{font-family:var(--cinzel);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
-  .hint{font-size:13.5px;color:var(--body-soft);font-style:italic;margin-top:8px}
-
-  /* talk-to-text */
-  .mic{display:inline-flex;align-items:center;gap:7px;font-family:var(--cinzel);font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--sage-deep);background:var(--sage-whisper);border:1px solid var(--sage-soft);padding:8px 12px;cursor:pointer;margin-top:8px}
-  .mic svg{width:13px;height:14px}
-  .mic svg *{fill:none;stroke:var(--sage-deep);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-  .mic.rec{background:var(--moss);border-color:var(--moss);color:var(--cream);animation:pulse 1.2s ease-in-out infinite}
-  .mic.rec svg *{stroke:var(--cream)}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.68}}
-  .photo-pick{display:flex;align-items:center;gap:14px}
-  .photo-pick img{width:84px;height:84px;object-fit:cover;border:1px solid var(--border)}
-  .toggle{display:flex;gap:8px}
-  .toggle button{flex:1;font-family:var(--cinzel);font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;padding:10px;border:1px solid var(--border);background:var(--surface);color:var(--body-soft);cursor:pointer}
-  .toggle button.on{background:var(--sage-whisper);border-color:var(--sage);color:var(--sage-deep)}
-
-  .btn{font-family:var(--cinzel);font-weight:500;font-size:11.5px;letter-spacing:0.2em;text-transform:uppercase;background:var(--moss);color:var(--cream);border:none;padding:15px 18px;cursor:pointer;width:100%;transition:background .2s ease}
+  /* ---- form card ---- */
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:28px 24px 26px;
+    margin-top:38px;
+    text-align:left;
+  }
+  .card-label{
+    font-family:var(--cinzel);
+    font-weight:500;
+    font-size:10px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+  }
+  .helper{
+    font-size:15.5px;
+    color:var(--body-soft);
+    margin-top:10px;
+    margin-bottom:16px;
+  }
+  input[type=email],input[type=text]{
+    font-family:var(--fraunces);
+    font-size:16px;
+    padding:14px 14px;
+    border:1px solid var(--border);
+    background:var(--cream);
+    color:var(--heading);
+    width:100%;
+    border-radius:0;
+    margin-bottom:10px;
+  }
+  input::placeholder{color:var(--muted);font-style:italic}
+  input[type=email]:focus,input[type=text]:focus{outline:none;border-color:var(--sage);background:var(--surface)}
+  .btn{
+    font-family:var(--cinzel);
+    font-weight:500;
+    font-size:11.5px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    background:var(--moss);
+    color:var(--cream);
+    border:none;
+    padding:16px 18px;
+    cursor:pointer;
+    width:100%;
+    margin-top:12px;
+    transition:background .25s ease, transform .12s ease;
+  }
   .btn:hover{background:var(--sage-deep)}
-  .btn.ghost{background:none;color:var(--sage-deep);border:1px solid var(--border)}
-  .btn.ghost:hover{background:var(--sage-whisper)}
-  .btn.sm{padding:11px 14px;font-size:10px}
-  .stack>*{margin-top:10px}
+  .btn:active{transform:translateY(1px)}
+  .err{color:var(--moss);font-size:13.5px;font-style:italic;margin-top:9px;min-height:16px}
+  .micro{
+    font-size:13.5px;
+    color:var(--muted);
+    margin-top:16px;
+    line-height:1.5;
+  }
 
-  /* faq */
-  .faq h3{font-family:var(--fraunces);font-weight:500;font-size:18px;color:var(--heading);margin-top:22px}
-  .faq p{font-size:15.5px;color:var(--body);margin-top:7px}
-  .faq ol{margin:8px 0 0 20px;font-size:15.5px}
-  .faq li{margin-top:5px}
-  .callout{background:var(--sage-whisper);border-left:2px solid var(--sage);padding:13px 15px;margin-top:12px;font-size:15px;color:var(--body)}
-  .it{font-style:italic;color:var(--sage-deep)}
+  /* ---- delivered state ---- */
+  .done{display:none;text-align:left}
+  .done.show{display:block;animation:fade .5s ease both}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .done p{font-size:16.5px;color:var(--body);margin-top:10px}
+  .qr{
+    width:148px;height:148px;margin:20px auto 4px;
+    border:1px solid var(--border);
+    background:var(--sage-whisper);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--cinzel);font-size:9.5px;letter-spacing:0.18em;
+    color:var(--muted);text-align:center;
+  }
 
-  footer{text-align:center;padding:26px 20px 8px}
-  .foot-rule{border:none;border-top:1px solid var(--border);margin-bottom:14px}
-  .foot-line{font-family:var(--cinzel);font-size:9px;letter-spacing:0.24em;color:var(--muted);text-transform:uppercase}
+  /* ---- footer ---- */
+  footer{margin-top:auto;padding-top:44px}
+  .foot-rule{border:none;border-top:1px solid var(--border);margin-bottom:16px}
+  .foot-line{
+    font-family:var(--cinzel);
+    font-weight:400;
+    font-size:9.5px;
+    letter-spacing:0.26em;
+    color:var(--muted);
+    text-transform:uppercase;
+  }
 
-  /* bottom nav */
-  .nav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;display:flex;background:var(--surface);border-top:1px solid var(--border);z-index:30}
-  .nav button{flex:1;background:none;border:none;padding:12px 4px 14px;cursor:pointer;font-family:var(--cinzel);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
-  .nav button.on{color:var(--sage-deep)}
-  .nav .ico{display:block;font-size:17px;margin-bottom:3px;font-family:var(--fraunces);font-style:normal}
-  .nav .add .ico{color:var(--moss)}
-
-  .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--moss);color:var(--cream);font-family:var(--cinzel);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:11px 18px;opacity:0;transition:opacity .3s ease;z-index:50;pointer-events:none}
-  .toast.show{opacity:1}
-  .menu-sheet{position:fixed;inset:0;background:rgba(32,35,31,.3);z-index:60;display:none}
-  .menu-sheet.show{display:block}
-  .menu-inner{position:absolute;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:var(--surface);padding:20px;border-top:1px solid var(--border)}
-  .menu-inner .btn{margin-top:10px}
+  .rev{opacity:0;transform:translateY(8px);animation:rev .7s ease forwards}
+  @keyframes rev{to{opacity:1;transform:none}}
+  .r1{animation-delay:.05s}.r2{animation-delay:.2s}.r3{animation-delay:.36s}
+  .r4{animation-delay:.52s}.r5{animation-delay:.68s}
 </style>
 </head>
 <body>
-<div class="app">
+  <div class="stage">
 
-  <div class="bar">
-    <svg class="sprout" width="24" height="24" viewBox="0 0 120 120">
-      <line x1="60" y1="76" x2="60" y2="104"></line>
-      <path d="M60 76 C 38 72, 22 58, 19 33 C 46 39, 59 54, 60 76 Z"></path>
-      <path d="M60 76 C 82 72, 98 58, 101 33 C 74 39, 61 54, 60 76 Z"></path>
-      <circle class="seed" cx="60" cy="44" r="5.5"></circle>
-    </svg>
-    <span class="brand">QUINTA &amp; CO.</span>
-    <span class="spacer"></span>
-    <button class="menu-btn" onclick="openMenu()">Export</button>
-  </div>
-
-  <!-- LIST -->
-  <section class="view show" id="view-list">
-    <div class="eyebrow">Your connections</div>
-    <h2>Everyone you've met.</h2>
-    <input class="search" id="search" placeholder="Search names, companies, notes…" oninput="render()">
-    <div id="list"></div>
-  </section>
-
-  <!-- ADD -->
-  <section class="view" id="view-add">
-    <div class="eyebrow">Add a connection</div>
-    <h2 id="addTitle">Who did you meet?</h2>
-
-    <div class="seg">
-      <button id="m-type" class="on" onclick="setMode('type')">Type / paste</button>
-      <button id="m-photo" onclick="setMode('photo')">Add a photo</button>
+    <div class="top rev r1">
+      <!-- Placeholder sprout — swap in the official Quinta sprout SVG. -->
+      <svg class="sprout" width="48" height="48" viewBox="0 0 120 120" aria-label="Quinta sprout">
+        <line x1="60" y1="76" x2="60" y2="104"></line>
+        <path d="M60 76 C 38 72, 22 58, 19 33 C 46 39, 59 54, 60 76 Z"></path>
+        <path d="M60 76 C 82 72, 98 58, 101 33 C 74 39, 61 54, 60 76 Z"></path>
+        <circle class="seed" cx="60" cy="44" r="5.5"></circle>
+      </svg>
+      <div class="wordmark">QUINTA &amp; CO.</div>
+      <div class="tagline">Practical AI, taught the way a friend would teach it.</div>
     </div>
 
-    <div id="mode-type">
-      <div class="field">
-        <label>Their card, a link, or a messy note</label>
-        <textarea id="raw" placeholder="e.g. Met Sarah Lopez at the BankHER table — runs a skincare line in Fort Worth, sarah@bloomskin.co, wants an intro to our CFO. Really warm."></textarea>
-        <button type="button" class="mic" onclick="dictate('raw',this)"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11 a7 7 0 0 0 14 0"></path><line x1="12" y1="18" x2="12" y2="21"></line><line x1="8" y1="21" x2="16" y2="21"></line></svg><span class="mlabel">Speak</span></button>
+    <!-- STATE 1 -->
+    <section id="offer">
+      <div class="eyebrow rev r2">A Quinta &amp; Co. Tool</div>
+      <h1 class="rev r3">Built with AI — and actually yours.</h1>
+      <p class="lede rev r4">A small tool for your phone. Snap a business card, QR code or jot a messy note and it becomes a clean list — who they are, where you met, what you owe them. No forms. No app store.</p>
+
+      <div class="card rev r5">
+        <div class="card-label">Let's swap cards</div>
+        <p class="helper">You're about to collect everyone you meet today — so let's start with you.</p>
+        <input type="text" id="name" placeholder="First and last name" autocomplete="name">
+        <input type="email" id="email" placeholder="your email" autocomplete="email" inputmode="email">
+        <button class="btn" id="sendBtn">Get the tool</button>
+        <div class="err" id="err"></div>
+        <p class="micro">We'll only reach out when the next class opens — nothing else.</p>
       </div>
-      <button class="btn ghost sm" onclick="parseRaw()">Pull out the details ↓</button>
-      <p class="hint">We'll grab the email, phone, name and company we can see — then you tidy the rest. Paste a QR code's contact (vCard) here too.</p>
-    </div>
+    </section>
 
-    <div id="mode-photo" style="display:none">
-      <div class="field">
-        <label>Photo of their card, booth, or them</label>
-        <div class="photo-pick">
-          <img id="thumb" alt="" style="display:none">
-          <div style="flex:1">
-            <input type="file" id="file" accept="image/*" capture="environment" style="display:none" onchange="handlePhoto(event)">
-            <button class="btn ghost sm" onclick="document.getElementById('file').click()">Take / choose photo</button>
-          </div>
-        </div>
-        <p class="hint">The photo's stored on your phone with the contact. Then add their details below.</p>
-      </div>
-    </div>
+    <!-- STATE 2 (removed): email is a gate only; submitting routes straight to the tool, no inbox round-trip -->
 
-    <div style="height:1px;background:var(--border);margin:18px 0"></div>
-
-    <div class="field"><label>Name</label><input type="text" id="f-name"></div>
-    <div class="field"><label>Company</label><input type="text" id="f-company"></div>
-    <div class="field"><label>What they do</label><input type="text" id="f-role"></div>
-    <div class="field"><label>Where we met</label><input type="text" id="f-met"></div>
-    <div class="field">
-      <label>Warm or cold</label>
-      <div class="toggle">
-        <button id="w-warm" onclick="setWarm('warm')">Warm</button>
-        <button id="w-cold" onclick="setWarm('cold')">Cold</button>
-      </div>
-    </div>
-    <div class="field"><label>Intro or follow-up I owe them</label><input type="text" id="f-followup"></div>
-    <div class="field"><label>Email</label><input type="text" id="f-email"></div>
-    <div class="field"><label>Phone</label><input type="text" id="f-phone"></div>
-    <div class="field"><label>Remember this about them</label><textarea id="f-note" style="min-height:70px"></textarea><button type="button" class="mic" onclick="dictate('f-note',this)"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11 a7 7 0 0 0 14 0"></path><line x1="12" y1="18" x2="12" y2="21"></line><line x1="8" y1="21" x2="16" y2="21"></line></svg><span class="mlabel">Speak</span></button></div>
-
-    <div class="stack">
-      <button class="btn" onclick="saveContact()">Save connection</button>
-      <button class="btn ghost" onclick="cancelAdd()">Cancel</button>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="view faq" id="view-faq">
-    <div class="eyebrow">Good to know</div>
-    <h2>A few honest answers.</h2>
-
-    <h3>Where does my data live?</h3>
-    <p>On your phone — nowhere else. Every connection you add is saved right here in this device's browser. It never goes to Quinta &amp; Co., to a server, or to anyone. <span class="it">Actually yours</span> means the list is yours, privately.</p>
-
-    <h3>What if I clear my browser history?</h3>
-    <p>Clearing your browsing data — or switching browsers, or getting a new phone — will erase the list, because it only lives here. There's no cloud copy to restore from.</p>
-    <div class="callout">So before you clear anything, <strong>export your contacts to Excel</strong> (the Export button, top right). That's your backup, and your way to move everyone into your real address book or CRM later. A good habit: export to yourself at the end of the event.</div>
-
-    <h3 id="hs">How do I add this to my home screen?</h3>
-    <p><strong>iPhone (Safari):</strong></p>
-    <ol>
-      <li>Tap the Share button (the square with an arrow).</li>
-      <li>Scroll down and tap <em>Add to Home Screen</em>.</li>
-      <li>Tap <em>Add</em>. It'll sit on your home screen like an app.</li>
-    </ol>
-    <p style="margin-top:12px"><strong>Android (Chrome):</strong></p>
-    <ol>
-      <li>Tap the ⋮ menu (top right).</li>
-      <li>Tap <em>Add to Home screen</em> (or <em>Install app</em>).</li>
-      <li>Tap <em>Add</em>.</li>
-    </ol>
-
-    <h3>Do I need a Claude account to use it?</h3>
-    <p>No. Nothing to sign into, nothing to install from an app store. It just works.</p>
-
-    <footer>
-      <button class="btn ghost sm" style="width:auto;display:inline-block" onclick="location.href='mailto:hello@quintaand.co?subject=The%20next%20Quinta%20%26%20Co.%20class'">Get the next Quinta &amp; Co. class</button>
-      <hr class="foot-rule" style="margin-top:22px">
-      <div class="foot-line">Quinta &amp; Co. · A Practice For Women Founders · Quintaand.co</div>
+    <footer class="rev r5">
+      <hr class="foot-rule">
+      <div class="foot-line">Quinta &amp; Co. · Quintaand.co</div>
     </footer>
-  </section>
-
-</div>
-
-<!-- bottom nav -->
-<div class="nav">
-  <button id="n-list" class="on" onclick="go('list')"><span class="ico">❡</span>Connections</button>
-  <button id="n-add" class="add" onclick="go('add')"><span class="ico">＋</span>Add</button>
-  <button id="n-faq" onclick="go('faq')"><span class="ico">?</span>Help</button>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<div class="menu-sheet" id="menu" onclick="closeMenu(event)">
-  <div class="menu-inner">
-    <div class="eyebrow">Export your contacts</div>
-    <p class="quiet">Take a copy with you — this is your backup before clearing anything.</p>
-    <button class="btn" onclick="exportExcel()">Download as Excel (.xlsx)</button>
-    <button class="btn ghost" onclick="exportText()">Copy as plain text</button>
-    <button class="btn ghost" onclick="closeMenu()">Close</button>
   </div>
-</div>
 
 <script>
-  /* ---------- storage adapter: real on-device when hosted, in-memory fallback in preview ---------- */
-  const Store=(()=>{
-    try{localStorage.setItem('__q','1');localStorage.removeItem('__q');
-      return{get:k=>localStorage.getItem(k),set:(k,v)=>localStorage.setItem(k,v)};}
-    catch(e){const m={};return{get:k=>(k in m?m[k]:null),set:(k,v)=>{m[k]=v;}};}
-  })();
-  const KEY='quinta_connections_v1';
-  let contacts=load();
-  let mode='type', editId=null, pendingPhoto=null, warm='';
+  // ===== PASTE YOUR GOOGLE SHEET URL HERE =====
+  // The Apps Script "Web app" URL from the deploy step (see setup notes).
+  // Until you paste it, emails just sit in memory and aren't saved.
+  const SHEET_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE';
+  // ============================================
 
-  function load(){try{return JSON.parse(Store.get(KEY))||[]}catch(e){return[]}}
-  function persist(){Store.set(KEY,JSON.stringify(contacts))}
+  const emailEl=document.getElementById('email');
+  const nameEl=document.getElementById('name');
+  const errEl=document.getElementById('err');
+  const valid=e=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
-  /* ---------- navigation ---------- */
-  function go(v){
-    stopDictation();
-    ['list','add','faq'].forEach(x=>{
-      document.getElementById('view-'+x).classList.toggle('show',x===v);
-      document.getElementById('n-'+x).classList.toggle('on',x===v);
-    });
-    if(v==='add'&&!editId) resetForm();
-    if(v==='list') render();
-    window.scrollTo(0,0);
+  document.getElementById('sendBtn').addEventListener('click',submit);
+  nameEl.addEventListener('keydown',e=>{if(e.key==='Enter')emailEl.focus();});
+  emailEl.addEventListener('keydown',e=>{if(e.key==='Enter')submit();});
+
+  function submit(){
+    const n=nameEl.value.trim();
+    const v=emailEl.value.trim();
+    if(!n){errEl.textContent='Your name, please.';return;}
+    if(!valid(v)){errEl.textContent='A real email, please.';return;}
+    errEl.textContent='';
+    captureSignup(n,v);
+    // route straight into the tool — same browser, no break point
+    window.location.href='quinta-networking-tool.html';
   }
 
-  /* ---------- add: modes ---------- */
-  function setMode(m){mode=m;
-    document.getElementById('m-type').classList.toggle('on',m==='type');
-    document.getElementById('m-photo').classList.toggle('on',m==='photo');
-    document.getElementById('mode-type').style.display=m==='type'?'block':'none';
-    document.getElementById('mode-photo').style.display=m==='photo'?'block':'none';
+  function captureSignup(n,v){
+    // If the Sheet URL hasn't been pasted yet, just hold it in memory (no error).
+    if(!SHEET_URL || SHEET_URL.indexOf('PASTE_')===0){window.__capturedSignup={name:n,email:v};return;}
+    try{
+      const blob=new Blob([JSON.stringify({name:n,email:v})],{type:'text/plain;charset=UTF-8'});
+      // sendBeacon guarantees it's sent even as we navigate to the tool.
+      if(navigator.sendBeacon){navigator.sendBeacon(SHEET_URL,blob);}
+      else{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({name:n,email:v})});}
+    }catch(e){/* never block the user from reaching the tool */}
   }
-  function setWarm(w){warm=w;
-    document.getElementById('w-warm').classList.toggle('on',w==='warm');
-    document.getElementById('w-cold').classList.toggle('on',w==='cold');
-  }
-
-  /* ---------- the extraction seam ----------
-     On-device, pattern-based today. To upgrade to true LLM extraction later,
-     replace parseRaw()'s body with a call to your proxy endpoint that runs Claude
-     and returns {name,company,role,met,followup,email,phone,note}. Data still
-     saves on-device; only the note/photo would transit at extraction time. */
-  function parseRaw(){
-    const raw=(document.getElementById('raw').value||'').trim();
-    if(!raw){toast('Paste or type something first');return;}
-    let f={name:'',company:'',role:'',met:'',followup:'',email:'',phone:'',note:raw};
-
-    // vCard (e.g. pasted from a QR digital card)
-    if(/BEGIN:VCARD/i.test(raw)){
-      const g=(re)=>{const m=raw.match(re);return m?m[1].trim():'';};
-      f.name=g(/\nFN[^:]*:(.+)/i);
-      f.company=g(/\nORG[^:]*:([^;\n]+)/i);
-      f.role=g(/\nTITLE[^:]*:(.+)/i);
-      f.email=g(/\nEMAIL[^:]*:(.+)/i);
-      f.phone=g(/\nTEL[^:]*:(.+)/i);
-      f.note='';
-    } else {
-      const em=raw.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i); if(em)f.email=em[0];
-      const ph=raw.match(/(\+?\d[\d\s().-]{7,}\d)/); if(ph)f.phone=ph[1].trim();
-      // name: first short line that isn't an email/url
-      const lines=raw.split(/[\n,;]+/).map(s=>s.trim()).filter(Boolean);
-      for(const ln of lines){
-        if(/@|http|www\.|\d{4,}/i.test(ln))continue;
-        const words=ln.split(/\s+/);
-        if(words.length<=4){f.name=ln.replace(/^met\s+/i,'');break;}
-      }
-      const co=raw.match(/\b([A-Z][\w&'.-]+(?:\s+[A-Z][\w&'.-]+)*\s+(?:Inc|LLC|Co|Studio|Labs|Group|Agency|Collective|Brands?))\b/);
-      if(co)f.company=co[1];
-      const fu=raw.match(/(?:wants?|needs?|asked for|owe[ds]?|follow[ -]?up|intro(?:duction)?)\b[^.;\n]*/i);
-      if(fu)f.followup=fu[0].trim();
-    }
-    document.getElementById('f-name').value=f.name;
-    document.getElementById('f-company').value=f.company;
-    document.getElementById('f-role').value=f.role;
-    document.getElementById('f-followup').value=f.followup;
-    document.getElementById('f-email').value=f.email;
-    document.getElementById('f-phone').value=f.phone;
-    document.getElementById('f-note').value=f.note;
-    if(/warm/i.test(raw))setWarm('warm'); else if(/cold/i.test(raw))setWarm('cold');
-    toast('Pulled out what we could — tidy it below');
-  }
-
-  /* ---------- photo: downscale + store as data URL ---------- */
-  function handlePhoto(e){
-    const file=e.target.files[0]; if(!file)return;
-    const reader=new FileReader();
-    reader.onload=ev=>{
-      const img=new Image();
-      img.onload=()=>{
-        const max=900, sc=Math.min(1,max/Math.max(img.width,img.height));
-        const c=document.createElement('canvas');
-        c.width=img.width*sc; c.height=img.height*sc;
-        c.getContext('2d').drawImage(img,0,0,c.width,c.height);
-        pendingPhoto=c.toDataURL('image/jpeg',0.75);
-        const t=document.getElementById('thumb'); t.src=pendingPhoto; t.style.display='block';
-      };
-      img.src=ev.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
-  /* ---------- save / edit / delete ---------- */
-  function saveContact(){
-    const c={
-      id:editId||('c'+Date.now()),
-      name:val('f-name'),company:val('f-company'),role:val('f-role'),
-      met:val('f-met'),warm:warm,followup:val('f-followup'),
-      email:val('f-email'),phone:val('f-phone'),note:val('f-note'),
-      photo:pendingPhoto,
-      added:editId?(contacts.find(x=>x.id===editId)||{}).added||now():now()
-    };
-    if(!c.name&&!c.company&&!c.note&&!c.photo){toast('Add at least a name or a note');return;}
-    const isEdit=!!editId;
-    if(isEdit){contacts=contacts.map(x=>x.id===editId?c:x);}
-    else{contacts.unshift(c);}
-    persist(); editId=null; toast(isEdit?'Updated':'Saved'); go('list');
-  }
-  function editContact(id){
-    const c=contacts.find(x=>x.id===id); if(!c)return;
-    editId=id; pendingPhoto=c.photo||null; warm=c.warm||'';
-    set('f-name',c.name);set('f-company',c.company);set('f-role',c.role);
-    set('f-met',c.met);set('f-followup',c.followup);set('f-email',c.email);
-    set('f-phone',c.phone);set('f-note',c.note);
-    setWarm(c.warm||''); 
-    const t=document.getElementById('thumb');
-    if(c.photo){t.src=c.photo;t.style.display='block';}else{t.style.display='none';}
-    document.getElementById('raw').value='';
-    document.getElementById('addTitle').textContent='Edit connection';
-    go('add'); document.getElementById('n-add').classList.add('on');
-  }
-  function delContact(id){
-    if(!confirm('Remove this connection?'))return;
-    contacts=contacts.filter(x=>x.id!==id); persist(); render(); toast('Removed');
-  }
-  function cancelAdd(){editId=null;go('list');}
-
-  function goInstall(){
-    go('faq');
-    setTimeout(()=>{const el=document.getElementById('hs');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},90);
-  }
-
-  /* ---------- render list ---------- */
-  function render(){
-    const q=(document.getElementById('search').value||'').toLowerCase();
-    const list=document.getElementById('list');
-    const search=document.getElementById('search');
-    const eyebrow=document.querySelector('#view-list .eyebrow');
-    const head=document.querySelector('#view-list h2');
-
-    // first run: no connections yet — show the welcome, hide search
-    if(contacts.length===0){
-      search.style.display='none';
-      eyebrow.textContent='Welcome';
-      head.textContent="You're in.";
-      list.innerHTML=
-        '<div class="welcome">'+
-          '<p class="lede">This is your room for everyone you meet this week. Snap a card, scan a QR, jot a messy note — or just tap <span class="it">Speak</span> and say it out loud. Each one becomes a clean contact that lives on your phone and answers to <span class="it">no one but you</span>.</p>'+
-          '<ol class="howto">'+
-            '<li>Add anyone — snap their card, scan a QR, type a note, or tap Speak and just say it.</li>'+
-            '<li>It pulls out the name, company and details. You tidy whatever\'s left.</li>'+
-            '<li>Export to Excel whenever you like — your backup, and your way into a CRM.</li>'+
-          '</ol>'+
-          '<button class="btn" onclick="go(\'add\')">Add your first connection</button>'+
-          '<button class="install" onclick="goInstall()">'+
-            '<span class="appicon"><svg viewBox="0 0 120 120" width="40" height="40"><line x1="60" y1="76" x2="60" y2="104"></line><path d="M60 76 C 38 72, 22 58, 19 33 C 46 39, 59 54, 60 76 Z"></path><path d="M60 76 C 82 72, 98 58, 101 33 C 74 39, 61 54, 60 76 Z"></path><circle class="seed" cx="60" cy="44" r="5.5"></circle></svg></span>'+
-            '<span class="txt"><span class="t1">Add it to your home screen</span></span>'+
-            '<span class="arr">→</span>'+
-          '</button>'+
-        '</div>';
-      return;
-    }
-
-    // returning: restore the list header + search
-    search.style.display='block';
-    eyebrow.textContent='Your connections';
-    head.textContent="Everyone you've met.";
-
-    const items=contacts.filter(c=>!q||[c.name,c.company,c.role,c.met,c.note,c.followup].join(' ').toLowerCase().includes(q));
-    if(!items.length){
-      list.innerHTML='<div class="empty"><div class="beat">No matches.</div><div>Try a different word.</div></div>';
-      return;
-    }
-    list.innerHTML=items.map(c=>{
-      const photo=c.photo?'<img class="photo" src="'+c.photo+'">':'';
-      const tag=c.warm?'<span class="tag">'+(c.warm==='warm'?'Warm':'Cold')+'</span>':'';
-      let body='';
-      if(c.role)body+='<div class="row">'+esc(c.role)+'</div>';
-      if(c.met){body+='<span class="lbl">Where we met</span><div class="row">'+esc(c.met)+'</div>';}
-      if(c.followup){body+='<span class="lbl">I owe them</span><div class="row">'+esc(c.followup)+'</div>';}
-      if(c.note){body+='<span class="lbl">Remember</span><div class="row">'+esc(c.note)+'</div>';}
-      if(c.email||c.phone){body+='<div class="row" style="color:var(--body-soft)">'+[esc(c.email),esc(c.phone)].filter(Boolean).join(' · ')+'</div>';}
-      return '<div class="card"><div class="top">'+photo+'<div><div class="nm">'+(esc(c.name)||'(no name)')+'</div>'+(c.company?'<div class="co">'+esc(c.company)+'</div>':'')+tag+'</div></div>'+body+
-        '<div class="acts"><button class="link" onclick="editContact(\''+c.id+'\')">Edit</button><button class="link danger" onclick="delContact(\''+c.id+'\')">Remove</button></div></div>';
-    }).join('');
-  }
-
-  /* ---------- export ---------- */
-  function exportExcel(){
-    if(!contacts.length){toast('Nothing to export yet');return;}
-    const rows=contacts.map(c=>({
-      Name:c.name,Company:c.company,'What they do':c.role,'Where we met':c.met,
-      'Warm/Cold':c.warm,'Intro/Follow-up owed':c.followup,Email:c.email,Phone:c.phone,
-      Notes:c.note,'Added':new Date(c.added).toLocaleString()
-    }));
-    const ws=XLSX.utils.json_to_sheet(rows);
-    ws['!cols']=[{wch:20},{wch:20},{wch:20},{wch:20},{wch:10},{wch:26},{wch:24},{wch:16},{wch:34},{wch:20}];
-    const wb=XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb,ws,'Connections');
-    XLSX.writeFile(wb,'quinta-connections.xlsx');
-    closeMenu(); toast('Excel downloaded');
-  }
-  function exportText(){
-    if(!contacts.length){toast('Nothing to export yet');return;}
-    const txt=contacts.map(c=>[
-      c.name&&('Name: '+c.name),c.company&&('Company: '+c.company),c.role&&('Does: '+c.role),
-      c.met&&('Met: '+c.met),c.warm&&('Warm/Cold: '+c.warm),c.followup&&('Owe: '+c.followup),
-      c.email&&('Email: '+c.email),c.phone&&('Phone: '+c.phone),c.note&&('Note: '+c.note)
-    ].filter(Boolean).join('\n')).join('\n\n———\n\n');
-    navigator.clipboard.writeText(txt).then(()=>{closeMenu();toast('Copied to clipboard');})
-      .catch(()=>{closeMenu();toast('Press and hold to copy');});
-  }
-
-  /* ---------- menu / toast / helpers ---------- */
-  function openMenu(){document.getElementById('menu').classList.add('show');}
-  function closeMenu(e){if(e&&e.target&&e.target.closest&&e.target.closest('.menu-inner'))return;document.getElementById('menu').classList.remove('show');}
-  function resetForm(){editId=null;pendingPhoto=null;warm='';setMode('type');
-    ['raw','f-name','f-company','f-role','f-met','f-followup','f-email','f-phone','f-note'].forEach(id=>set(id,''));
-    setWarm(''); document.getElementById('thumb').style.display='none';
-    document.getElementById('addTitle').textContent='Who did you meet?';
-  }
-  let tT;
-  function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1900);}
-  function val(id){return document.getElementById(id).value.trim();}
-  function set(id,v){const el=document.getElementById(id);if(el)el.value=v||'';}
-  function now(){return new Date().toISOString();}
-  function esc(s){return(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-
-  /* ---------- talk-to-text ----------
-     Uses the browser's speech recognition where available (Android/Chrome,
-     most current iOS Safari). Where it isn't — or is blocked in a home-screen
-     app — it nudges the user to the keyboard's own mic key, which always works. */
-  let recog=null,recogBtn=null;
-  function dictate(targetId,btn){
-    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-    const target=document.getElementById(targetId);
-    if(!SR){toast('Tap the mic on your keyboard to talk');target.focus();return;}
-    if(recog){stopDictation();return;} // toggle off
-    recog=new SR();recog.lang='en-US';recog.interimResults=true;recog.continuous=true;
-    recogBtn=btn;btn.classList.add('rec');btn.querySelector('.mlabel').textContent='Listening…';
-    const base=target.value?target.value.replace(/\s+$/,'')+' ':'';
-    let finalText='';
-    recog.onresult=e=>{
-      let interim='';
-      for(let i=e.resultIndex;i<e.results.length;i++){
-        const t=e.results[i][0].transcript;
-        if(e.results[i].isFinal)finalText+=t+' ';else interim+=t;
-      }
-      target.value=base+finalText+interim;
-    };
-    recog.onerror=e=>{toast(e.error==='not-allowed'?'Mic blocked — allow it, or use the keyboard mic':'Didn\'t catch that — try again');stopDictation();};
-    recog.onend=()=>stopDictation();
-    try{recog.start();}catch(e){stopDictation();}
-  }
-  function stopDictation(){
-    if(recog){try{recog.stop();}catch(e){}}
-    if(recogBtn){recogBtn.classList.remove('rec');recogBtn.querySelector('.mlabel').textContent='Speak';}
-    recog=null;recogBtn=null;
-  }
-
-  render();
 </script>
 </body>
 </html>
