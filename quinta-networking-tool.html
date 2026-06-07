@@ -35,6 +35,15 @@
   .bar .spacer{flex:1}
   .menu-btn{font-family:var(--cinzel);font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage-deep);background:none;border:1px solid var(--border);padding:8px 12px;cursor:pointer}
 
+  /* persistent add-to-home-screen bar */
+  .a2hs{display:flex;align-items:center;gap:11px;padding:10px 16px;background:var(--sage-whisper);border-bottom:1px solid var(--sage-soft);cursor:pointer}
+  .a2hs-ico{width:32px;height:32px;flex:none;background:var(--moss);border-radius:7px;display:flex;align-items:center;justify-content:center}
+  .a2hs-ico svg *{fill:none;stroke:var(--cream);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+  .a2hs-ico svg .seed{fill:var(--cream);stroke:none}
+  .a2hs-txt{flex:1;font-family:var(--fraunces);font-size:14.5px;font-weight:500;color:var(--moss)}
+  .a2hs-go{font-family:var(--cinzel);font-weight:600;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream);background:var(--moss);border:none;padding:8px 12px;cursor:pointer;flex:none}
+  .a2hs-x{background:none;border:none;color:var(--sage-deep);font-size:22px;line-height:1;cursor:pointer;padding:0 2px;flex:none}
+
   .view{display:none;padding:20px;flex:1}
   .view.show{display:block;animation:fade .35s ease both}
   @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
@@ -132,9 +141,11 @@
 
   /* bottom nav */
   .nav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;display:flex;background:var(--surface);border-top:1px solid var(--border);z-index:30}
-  .nav button{flex:1;background:none;border:none;padding:12px 4px 14px;cursor:pointer;font-family:var(--cinzel);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+  .nav button{flex:1;background:none;border:none;padding:11px 4px 13px;cursor:pointer;font-family:var(--cinzel);font-weight:600;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--body)}
   .nav button.on{color:var(--sage-deep)}
-  .nav .ico{display:block;font-size:17px;margin-bottom:3px;font-family:var(--fraunces);font-style:normal}
+  .nav .ico{display:block;margin-bottom:4px;line-height:0}
+  .nav .ico svg{width:23px;height:23px}
+  .nav .ico svg *{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .nav .add .ico{color:var(--moss)}
 
   .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--moss);color:var(--cream);font-family:var(--cinzel);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;padding:11px 18px;opacity:0;transition:opacity .3s ease;z-index:50;pointer-events:none}
@@ -158,6 +169,14 @@
     <span class="brand">QUINTA &amp; CO.</span>
     <span class="spacer"></span>
     <button class="menu-btn" onclick="openMenu()">Export</button>
+  </div>
+
+  <!-- persistent add-to-home-screen bar (hidden once installed) -->
+  <div class="a2hs" id="a2hs" onclick="goInstall()">
+    <span class="a2hs-ico"><svg viewBox="0 0 120 120" width="19" height="19"><line x1="60" y1="76" x2="60" y2="104"></line><path d="M60 76 C 38 72, 22 58, 19 33 C 46 39, 59 54, 60 76 Z"></path><path d="M60 76 C 82 72, 98 58, 101 33 C 74 39, 61 54, 60 76 Z"></path><circle class="seed" cx="60" cy="44" r="5.5"></circle></svg></span>
+    <span class="a2hs-txt">Add this to your home screen</span>
+    <button class="a2hs-go">How →</button>
+    <button class="a2hs-x" onclick="dismissA2HS(event)" aria-label="Dismiss">×</button>
   </div>
 
   <!-- LIST -->
@@ -266,9 +285,9 @@
 
 <!-- bottom nav -->
 <div class="nav">
-  <button id="n-list" class="on" onclick="go('list')"><span class="ico">❡</span>Connections</button>
-  <button id="n-add" class="add" onclick="go('add')"><span class="ico">＋</span>Add</button>
-  <button id="n-faq" onclick="go('faq')"><span class="ico">?</span>Help</button>
+  <button id="n-list" class="on" onclick="go('list')"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="7.5" r="3"></circle><path d="M3.5 18 a5.5 5.5 0 0 1 11 0"></path><path d="M15.5 5 a3 3 0 0 1 0 5.4"></path><path d="M16.2 13.4 a5.5 5.5 0 0 1 3.8 4.6"></path></svg></span>Connections</button>
+  <button id="n-add" class="add" onclick="go('add')"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg></span>Add</button>
+  <button id="n-faq" onclick="go('faq')"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.3 9.2 a2.7 2.7 0 0 1 4.6 1.9 c0 1.9 -2 2 -2 3.3"></path><line x1="11.9" y1="16.6" x2="11.9" y2="16.7"></line></svg></span>Help</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -424,6 +443,13 @@
     go('faq');
     setTimeout(()=>{const el=document.getElementById('hs');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},90);
   }
+
+  function dismissA2HS(e){ if(e) e.stopPropagation(); const b=document.getElementById('a2hs'); if(b) b.style.display='none'; }
+  // Hide the install bar if the app is already running from the home screen
+  (function(){
+    var standalone=(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone===true;
+    if(standalone) dismissA2HS();
+  })();
 
   /* ---------- render list ---------- */
   function render(){
