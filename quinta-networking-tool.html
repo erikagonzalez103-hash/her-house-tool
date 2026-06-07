@@ -65,7 +65,7 @@
   .card .co{font-size:14.5px;color:var(--body-soft)}
   .tag{display:inline-block;font-family:var(--cinzel);font-size:8.5px;letter-spacing:0.16em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--sage-soft);color:var(--sage-deep);margin-top:8px;background:var(--sage-whisper)}
   .card .row{font-size:14.5px;color:var(--body);margin-top:8px}
-  .card .lbl{font-family:var(--cinzel);font-size:8.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-top:8px;margin-bottom:1px}
+  .card .lbl{font-family:var(--cinzel);font-weight:600;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--body-soft);display:block;margin-top:8px;margin-bottom:2px}
   .card .acts{display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
   .link{font-family:var(--cinzel);font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--sage-deep);background:none;border:none;cursor:pointer;padding:0}
   .link.danger{color:var(--moss)}
@@ -104,7 +104,7 @@
   textarea:focus,input[type=text]:focus{outline:none;border-color:var(--sage)}
   textarea{min-height:120px;resize:vertical;line-height:1.5}
   .field{margin-bottom:12px}
-  .field label{font-family:var(--cinzel);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+  .field label{font-family:var(--cinzel);font-weight:600;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--body-soft);display:block;margin-bottom:6px}
   .hint{font-size:13.5px;color:var(--body-soft);font-style:italic;margin-top:8px}
 
   /* talk-to-text */
@@ -295,9 +295,11 @@
 <div class="menu-sheet" id="menu" onclick="closeMenu(event)">
   <div class="menu-inner">
     <div class="eyebrow">Export your contacts</div>
-    <p class="quiet">Take a copy with you — this is your backup before clearing anything.</p>
-    <button class="btn" onclick="exportExcel()">Download as Excel (.xlsx)</button>
+    <p class="quiet">Take a copy with you — your backup before clearing anything.</p>
+    <button class="btn" onclick="exportEmail()">Email the list to me</button>
     <button class="btn ghost" onclick="exportText()">Copy as plain text</button>
+    <button class="btn ghost" onclick="exportExcel()">Download as Excel (.xlsx)</button>
+    <p class="quiet" style="font-size:13px;margin-top:12px">On a phone, Email or Copy work best. The Excel download is easiest on a computer.</p>
     <button class="btn ghost" onclick="closeMenu()">Close</button>
   </div>
 </div>
@@ -521,15 +523,22 @@
     XLSX.writeFile(wb,'quinta-connections.xlsx');
     closeMenu(); toast('Excel downloaded');
   }
-  function exportText(){
-    if(!contacts.length){toast('Nothing to export yet');return;}
-    const txt=contacts.map(c=>[
+  function buildText(){
+    return contacts.map(c=>[
       c.name&&('Name: '+c.name),c.company&&('Company: '+c.company),c.role&&('Does: '+c.role),
       c.met&&('Met: '+c.met),c.warm&&('Warm/Cold: '+c.warm),c.followup&&('Owe: '+c.followup),
       c.email&&('Email: '+c.email),c.phone&&('Phone: '+c.phone),c.note&&('Note: '+c.note)
     ].filter(Boolean).join('\n')).join('\n\n———\n\n');
-    navigator.clipboard.writeText(txt).then(()=>{closeMenu();toast('Copied to clipboard');})
+  }
+  function exportText(){
+    if(!contacts.length){toast('Nothing to export yet');return;}
+    navigator.clipboard.writeText(buildText()).then(()=>{closeMenu();toast('Copied to clipboard');})
       .catch(()=>{closeMenu();toast('Press and hold to copy');});
+  }
+  function exportEmail(){
+    if(!contacts.length){toast('Nothing to export yet');return;}
+    closeMenu();
+    location.href='mailto:?subject='+encodeURIComponent('My connections — Quinta & Co.')+'&body='+encodeURIComponent(buildText());
   }
 
   /* ---------- menu / toast / helpers ---------- */
@@ -551,14 +560,14 @@
      Uses the browser's speech recognition where available (Android/Chrome,
      most current iOS Safari). Where it isn't — or is blocked in a home-screen
      app — it nudges the user to the keyboard's own mic key, which always works. */
-  let recog=null,recogBtn=null;
+  let recog=null,recogBtn=null,recogTimer=null;
   function dictate(targetId,btn){
     const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
     const target=document.getElementById(targetId);
     if(!SR){toast('Tap the mic on your keyboard to talk');target.focus();return;}
-    if(recog){stopDictation();return;} // toggle off
+    if(recog){stopDictation();return;} // tap again to stop
     recog=new SR();recog.lang='en-US';recog.interimResults=true;recog.continuous=true;
-    recogBtn=btn;btn.classList.add('rec');btn.querySelector('.mlabel').textContent='Listening…';
+    recogBtn=btn;btn.classList.add('rec');btn.querySelector('.mlabel').textContent='Tap to stop';
     const base=target.value?target.value.replace(/\s+$/,'')+' ':'';
     let finalText='';
     recog.onresult=e=>{
@@ -571,9 +580,11 @@
     };
     recog.onerror=e=>{toast(e.error==='not-allowed'?'Mic blocked — allow it, or use the keyboard mic':'Didn\'t catch that — try again');stopDictation();};
     recog.onend=()=>stopDictation();
-    try{recog.start();}catch(e){stopDictation();}
+    try{recog.start();}catch(e){stopDictation();return;}
+    recogTimer=setTimeout(stopDictation,40000); // safety: never get stuck listening
   }
   function stopDictation(){
+    if(recogTimer){clearTimeout(recogTimer);recogTimer=null;}
     if(recog){try{recog.stop();}catch(e){}}
     if(recogBtn){recogBtn.classList.remove('rec');recogBtn.querySelector('.mlabel').textContent='Speak';}
     recog=null;recogBtn=null;
